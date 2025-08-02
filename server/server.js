@@ -3,6 +3,7 @@ import "dotenv/config";
 import cors from "cors";
 import connectDB from "./src/config/db.js";
 import userRoutes from "./src/routes/userRoutes.js";
+import postRoutes from "./src/routes/postRoutes.js";
 
 
 const app = express();
@@ -19,6 +20,7 @@ app.use("/api/status", (req, res) => {
 
 // api routes
 app.use("/api/user", userRoutes);
+app.use("/api/post", postRoutes);
 
 
 // Run server
