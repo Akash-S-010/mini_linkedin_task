@@ -74,21 +74,24 @@ A robust backend server for a professional networking platform, built with **Nod
    npm run dev
    ```
 
+## 📁 Project Structure
+
 server/
 ├── src/
-│   ├── config/           # Database configuration
-│   │   └── db.js
-│   ├── controllers/      # Business logic (user, posts)
-│   ├── middleware/       # Middleware (auth, error handling)
-│   │   └── auth.js
-│   ├── models/           # Mongoose models
-│   ├── routes/           # Express routes
-│   │   ├── userRoutes.js
-│   │   └── postRoutes.js
-│   └── index.js          # Entry point of the app
-├── .env                  # Environment variables
+│ ├── config/ # Database configuration
+│ │ └── db.js
+│ ├── controllers/ # Business logic (user, posts)
+│ ├── middleware/ # Middleware (auth, error handling)
+│ │ └── auth.js
+│ ├── models/ # Mongoose models
+│ ├── routes/ # Express routes
+│ │ ├── userRoutes.js
+│ │ └── postRoutes.js
+│ └── index.js # Entry point of the app
+├── .env # Environment variables
 ├── package.json
 └── README.md
+
 
 | Method | Endpoint            | Description                        |
 | ------ | ------------------- | ---------------------------------- |
@@ -114,8 +117,8 @@ server/
 3. Connect your GitHub repo.
 
 4. Add the following environment variables in the Render dashboard:
-MONGO_URI
-JWT_SECRET
+MONGO_URI, 
+JWT_SECRET, 
 PORT
 
 Deploy and note the provided public URL.
