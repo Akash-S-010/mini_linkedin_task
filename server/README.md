@@ -76,6 +76,7 @@ A robust backend server for a professional networking platform, built with **Nod
 
 ## 📁 Project Structure
 
+```bash
 server/
 ├── src/
 │ ├── config/ # Database configuration
@@ -91,6 +92,7 @@ server/
 ├── .env # Environment variables
 ├── package.json
 └── README.md
+```
 
 
 | Method | Endpoint            | Description                        |
