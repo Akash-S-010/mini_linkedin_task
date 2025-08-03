@@ -27,30 +27,55 @@ export const useAuthStore = create((set) => ({
 
     //   user signup
     signup: async (formData) => {
-        set({ loading: true });
+        set({ loading: true, error: null });
         try {
             const res = await axiosInstance.post("/user/signup", formData);
-            set({ user: res.data, loading: false });
+            // After successful signup, automatically log in the user
+            const loginRes = await axiosInstance.post("/user/login", {
+                email: formData.email,
+                password: formData.password
+            });
+            set({ user: loginRes.data.userData, loading: false, error: null });
+            return loginRes.data.userData;
         } catch (err) {
+            const errorMessage = err.response?.data?.message || "Signup failed";
             set({
                 user: null,
-                error: err.response?.data?.message || "Failed",
+                error: errorMessage,
                 loading: false,
             });
+            throw new Error(errorMessage);
         }
     },
 
 
     //   user login
     login: async (formData) => {
-        set({ loading: true });
+        set({ loading: true, error: null });
         try {
             const res = await axiosInstance.post("/user/login", formData);
-            set({ user: res.data.userData, loading: false });
+            set({ user: res.data.userData, loading: false, error: null });
+            return res.data.userData;
         } catch (err) {
+            const errorMessage = err.response?.data?.message || "Login failed";
             set({
                 user: null,
-                error: err.response?.data?.message || "Failed",
+                error: errorMessage,
+                loading: false,
+            });
+            throw new Error(errorMessage);
+        }
+    },
+
+    //   user logout
+    logout: async () => {
+        set({ loading: true });
+        try {
+            await axiosInstance.post("/user/logout");
+            set({ user: null, loading: false, error: null });
+        } catch (err) {
+            set({
+                error: err.response?.data?.message || "Logout failed",
                 loading: false,
             });
         }

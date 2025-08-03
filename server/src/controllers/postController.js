@@ -18,7 +18,10 @@ export const createPost = async (req, res) => {
 
         await newPost.save();
 
-        res.status(201).json({ message: "Post created", post: newPost });
+        // Populate the author information before sending response
+        const populatedPost = await Post.findById(newPost._id).populate("author", "name");
+
+        res.status(201).json({ message: "Post created", post: populatedPost });
     } catch (err) {
         console.error("Error in createPost", err);
         res.status(500).json({ message: "Server error" });
@@ -49,7 +52,9 @@ export const getMyProfileAndPosts = async (req, res) => {
         const user = await User.findById(req.userId).select("-password");
         if (!user) return res.status(404).json({ message: "User not found" });
 
-        const posts = await Post.find({ author: req.userId }).sort({ createdAt: -1 });
+        const posts = await Post.find({ author: req.userId })
+            .populate("author", "name") // populate author name
+            .sort({ createdAt: -1 });
 
         res.status(200).json({ user, posts });
     } catch (error) {

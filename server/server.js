@@ -27,7 +27,7 @@ app.use("/api/status", (req, res) => {
 
 // api routes
 app.use("/api/user", userRoutes);
-app.use("/api/post", postRoutes);
+app.use("/api/posts", postRoutes);
 
 
 // Run server
